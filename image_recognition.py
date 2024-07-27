@@ -32,7 +32,7 @@ def show_labels(image_path, labels):
     try:
         image = Image.open(image_path)
         draw = ImageDraw.Draw(image)
-        font = ImageFont.truetype("arial.ttf", 24)  # Use a larger font size
+        font = ImageFont.truetype("arial.ttf", 24) 
         for label in labels:
             if 'Instances' in label:
                 for instance in label['Instances']:
@@ -44,7 +44,7 @@ def show_labels(image_path, labels):
                     draw.rectangle(
                         [left, top, left + width, top + height],
                         outline='red',
-                        width=3  # Thicker line for bounding box
+                        width=3 
                     )
                     draw.text((left, top), label['Name'], fill='red', font=font)
         image.show()
@@ -53,12 +53,12 @@ def show_labels(image_path, labels):
 
 if __name__ == "__main__":
     bucket_name = 'my-image-recognition-bucket-123'
-    file_name = 'image1.jpg'  # Ensure this matches your actual file name
+    file_name = 'image1.jpg' 
 
-    # Step 1: Upload the image to S3
+    # upload the image to S3
     upload_to_s3(file_name, bucket_name)
 
-    # Step 2: Detect labels in the image
+    # label the image
     labels = detect_labels(bucket_name, file_name)
     for label in labels:
         print(f"Label: {label['Name']}, Confidence: {label['Confidence']}")
